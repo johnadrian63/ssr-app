@@ -19,10 +19,10 @@ export class PostList implements OnInit {
    private readonly postListService: PostService = inject<PostService>(PostService);
 
    public ngOnInit(): void {
-      this.getList();
+      this.getPosts();
    }
 
-   private getList(): void {
+   private getPosts(): void {
       this.postListService.getPosts()
          .subscribe((posts: IPost[]) => {
             this.posts.set(posts);

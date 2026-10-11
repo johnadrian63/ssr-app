@@ -19,10 +19,10 @@ export class UserList implements OnInit {
    public readonly users: WritableSignal<IUser[]> = signal<IUser[]>([]);
 
    public ngOnInit(): void {
-      this.getData();
+      this.getUsers();
    }
 
-   private getData(): void {
+   private getUsers(): void {
       this.userService.getUsers()
          .subscribe((users: IUser[]) => {
             this.users.set(users);
