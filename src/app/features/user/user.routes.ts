@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
 
 import { UserList } from "./list/user-list";
+import { UserView } from "./view/user-view";
 
 export const userRoutes: Routes = [
    {
@@ -8,8 +9,8 @@ export const userRoutes: Routes = [
       component: UserList,
       pathMatch: "prefix"
    },
-   // {
-   //    path: ":id",
-   //    component: PostView
-   // }
+   {
+      path: ":id",
+      component: UserView
+   }
 ];

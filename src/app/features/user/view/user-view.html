@@ -1,0 +1,52 @@
+<form class="max-w-sm mx-auto space-y-4">
+   <div>
+      <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Name</label>
+      <div
+         class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      >
+         {{ user()?.name }}
+      </div>
+   </div>
+   <div>
+      <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Username</label>
+      <div
+         class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      >
+         {{ user()?.username }}
+      </div>
+   </div>
+   <div>
+      <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Email</label>
+      <div
+         class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      >
+         {{ user()?.email }}
+      </div>
+   </div>
+   <div>
+      <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Phone</label>
+      <div
+         class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      >
+         {{ user()?.phone }}
+      </div>
+   </div>
+   <div>
+      <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Address</label>
+      <div
+         class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      >
+         {{
+            `${user()?.address?.suite} ${user()?.address?.street} ${user()?.address?.city}, ${user()?.address?.zipcode}`
+         }}
+      </div>
+   </div>
+   <div>
+      <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Website</label>
+      <div
+         class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      >
+         {{ user()?.website }}
+      </div>
+   </div>
+</form>

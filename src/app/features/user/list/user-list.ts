@@ -25,7 +25,6 @@ export class UserList implements OnInit {
    private getData(): void {
       this.userService.getUsers()
          .subscribe((users: IUser[]) => {
-            console.log(users);
             this.users.set(users);
          });
    }
