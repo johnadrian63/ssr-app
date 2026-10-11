@@ -1,8 +1,10 @@
 import { Routes } from "@angular/router";
 
+import { PostList } from "./list/post-list";
+
 export const postRoutes: Routes = [
   {
-    path: "",
-    loadComponent: () => import("./list/post-list").then((c) => c.PostList),
+    path: "list",
+    component: PostList,
   }
 ];
