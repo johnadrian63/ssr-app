@@ -5,7 +5,7 @@ import { PostView } from "./view/post-view";
 
 export const postRoutes: Routes = [
    {
-      path: "list",
+      path: "",
       component: PostList,
       pathMatch: "prefix"
    },

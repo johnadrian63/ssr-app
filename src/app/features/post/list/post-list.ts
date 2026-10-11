@@ -23,7 +23,7 @@ export class PostList implements OnInit {
    }
 
    private getList(): void {
-      this.postListService.getList()
+      this.postListService.getPosts()
          .subscribe((posts: IPost[]) => {
             this.posts.set(posts);
          });

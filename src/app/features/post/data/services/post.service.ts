@@ -11,7 +11,7 @@ export class PostService {
    private readonly httpClient = inject(HttpClient);
    private readonly baseUrl = "https://jsonplaceholder.typicode.com";
 
-   public getList(): Observable<IPost[]> {
+   public getPosts(): Observable<IPost[]> {
       return this.httpClient.get<IPost[]>(`${this.baseUrl}/posts`);
    }
 

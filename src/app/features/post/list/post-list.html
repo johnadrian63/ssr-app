@@ -13,7 +13,7 @@
          @for (post of posts(); track post.id) {
             <tr class="bg-neutral-primary border-b border-default">
                <td class="px-6 py-4">
-                  <a [routerLink]="['/post', post.id]">{{ post.title }}</a>
+                  <a [routerLink]="['/posts', post.id]">{{ post.title }}</a>
                </td>
             </tr>
          }
