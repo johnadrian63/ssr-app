@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 
-import { PostListService } from "./data/services/post-list-service";
-import { IPost } from "./data/models/IPost";
+import { IPost } from "../data/models/IPost";
+import { PostService } from "../data/services/post.service";
+import { RouterLink } from "@angular/router";
 
 @Component({
    selector: 'app-post-list',
-   imports: [],
+   imports: [
+      RouterLink
+   ],
    templateUrl: './post-list.html',
    styleUrl: './post-list.scss',
    changeDetection: ChangeDetectionStrategy.OnPush
@@ -13,7 +16,7 @@ import { IPost } from "./data/models/IPost";
 export class PostList implements OnInit {
    public readonly posts: WritableSignal<IPost[]> = signal<IPost[]>([]);
 
-   private readonly postListService: PostListService = inject<PostListService>(PostListService);
+   private readonly postListService: PostService = inject<PostService>(PostService);
 
    public ngOnInit(): void {
       this.getList();
@@ -22,7 +25,6 @@ export class PostList implements OnInit {
    private getList(): void {
       this.postListService.getList()
          .subscribe((posts: IPost[]) => {
-            console.log(posts);
             this.posts.set(posts);
          });
    }

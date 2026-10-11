@@ -7,11 +7,15 @@ import { IPost } from "../models/IPost";
 @Injectable({
    providedIn: 'root',
 })
-export class PostListService {
+export class PostService {
    private readonly httpClient = inject(HttpClient);
    private readonly baseUrl = "https://jsonplaceholder.typicode.com";
 
    public getList(): Observable<IPost[]> {
       return this.httpClient.get<IPost[]>(`${this.baseUrl}/posts`);
+   }
+
+   public getPost(id: number): Observable<IPost> {
+      return this.httpClient.get<IPost>(`${this.baseUrl}/posts/${id}`);
    }
 }
