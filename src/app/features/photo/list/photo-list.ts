@@ -32,9 +32,7 @@ export class PhotoList {
    );
 
    public getNext(): void {
-      this.currentPage.update((currentPage: number) => {
-         return currentPage >= 1 ? currentPage + 1 : 1;
-      });
+      this.currentPage.update((currentPage: number) => currentPage + 1);
    }
 
    public getPrevious(): void {
