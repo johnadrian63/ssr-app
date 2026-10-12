@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,5 +8,9 @@ import { RouterLink, RouterOutlet } from '@angular/router';
    styleUrl: './app.scss'
 })
 export class App {
-   protected readonly title = signal('ssr-app');
+   public readonly toggle: WritableSignal<boolean> = signal<boolean>(false);
+
+   public toggleMenu(): void {
+      this.toggle.update((toggled: boolean) => !toggled);
+   }
 }
