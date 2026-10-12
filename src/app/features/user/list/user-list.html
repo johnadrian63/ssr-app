@@ -18,7 +18,9 @@
          @for (user of users(); track user.id) {
             <tr class="bg-neutral-primary border-b border-default">
                <td class="px-6 py-4">
-                  <a [routerLink]="['/users', user.id]" class="text-blue-600 hover:underline">{{ user.name }}</a>
+                  <a [routerLink]="['/users', user.id]" class="text-blue-600 hover:underline">{{
+                     user.name
+                  }}</a>
                </td>
                <td class="px-6 py-4">
                   {{ user.username }}
@@ -35,7 +37,12 @@
                   {{ user.phone }}
                </td>
                <td class="px-6 py-4">
-                  {{ user.website }}
+                  <a
+                     [href]="'//' + user.website"
+                     target="_blank"
+                     class="text-blue-500 hover:underline"
+                     >{{ user.website }}</a
+                  >
                </td>
             </tr>
          }
