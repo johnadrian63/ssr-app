@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal, signal, WritableSignal } from '@angular/core';
+import { switchMap } from "rxjs";
+import { RouterLink } from "@angular/router";
+import { toObservable, toSignal } from "@angular/core/rxjs-interop";
 
 import { IPost } from "../data/models/IPost";
 import { PostService } from "../data/services/post.service";
-import { RouterLink } from "@angular/router";
 
 @Component({
    selector: 'app-post-list',
@@ -13,19 +15,32 @@ import { RouterLink } from "@angular/router";
    styleUrl: './post-list.scss',
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PostList implements OnInit {
-   public readonly posts: WritableSignal<IPost[]> = signal<IPost[]>([]);
-
+export class PostList {
    private readonly postListService: PostService = inject<PostService>(PostService);
 
-   public ngOnInit(): void {
-      this.getPosts();
+   public readonly currentPage: WritableSignal<number> = signal<number>(1);
+   
+   public readonly posts: Signal<IPost[]> = toSignal<IPost[], []>(
+      toObservable(this.currentPage)
+         .pipe(
+            switchMap((currentPage: number) => {
+               return this.postListService.getPosts(currentPage);
+            })
+         ),
+      {
+         initialValue: []
+      }
+   );
+
+   public getNext(): void {
+      this.currentPage.update((currentPage: number) => {
+         return currentPage >= 1 ? currentPage + 1 : 1;
+      });
    }
 
-   private getPosts(): void {
-      this.postListService.getPosts()
-         .subscribe((posts: IPost[]) => {
-            this.posts.set(posts);
-         });
+   public getPrevious(): void {
+      this.currentPage.update((currentPage: number) => {
+         return currentPage > 1 ? currentPage - 1 : 1;
+      });
    }
 }

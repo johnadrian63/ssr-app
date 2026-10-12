@@ -1,14 +1,15 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
-import { IUser } from "../../user/data/models/IUser";
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
+
 import { IPhoto } from "../data/models/IPhoto";
 import { PhotoService } from "../data/services/photo.service";
-import { ActivatedRoute } from "@angular/router";
 
 @Component({
    selector: 'app-photo-view',
    imports: [],
    templateUrl: './photo-view.html',
    styleUrl: './photo-view.scss',
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoView implements OnInit {
    private readonly photoService: PhotoService = inject<PhotoService>(PhotoService);

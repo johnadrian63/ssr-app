@@ -1,6 +1,23 @@
 <div
    class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default"
 >
+   <div class="flex space-x-2 justify-end pr-2 pt-2">
+      <!-- Previous Button -->
+      <button
+         (click)="getPrevious()"
+         class="text-body bg-neutral-secondary-medium border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none cursor-pointer"
+      >
+         Previous
+      </button>
+
+      <!-- Next Button -->
+      <button
+         class="text-body bg-neutral-secondary-medium border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none cursor-pointer"
+         (click)="getNext()"
+      >
+         Next
+      </button>
+   </div>
    <table class="w-full text-sm text-left rtl:text-right text-body">
       <thead
          class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default"
@@ -17,6 +34,10 @@
                      post.title
                   }}</a>
                </td>
+            </tr>
+         } @empty {
+            <tr>
+               <td class="px-6 py-4 text-center">No records found.</td>
             </tr>
          }
       </tbody>

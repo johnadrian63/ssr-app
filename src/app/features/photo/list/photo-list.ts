@@ -1,5 +1,7 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal, signal, WritableSignal } from '@angular/core';
+import { toObservable, toSignal } from "@angular/core/rxjs-interop";
 import { RouterLink } from "@angular/router";
+import { switchMap } from "rxjs";
 
 import { IPhoto } from "../data/models/IPhoto";
 import { PhotoService } from "../data/services/photo.service";
@@ -11,20 +13,33 @@ import { PhotoService } from "../data/services/photo.service";
    ],
    templateUrl: './photo-list.html',
    styleUrl: './photo-list.scss',
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoList {
    private readonly photoService: PhotoService = inject<PhotoService>(PhotoService);
 
-   public readonly photos: WritableSignal<IPhoto[]> = signal<IPhoto[]>([]);
+   public readonly currentPage: WritableSignal<number> = signal<number>(1);
 
-   public ngOnInit(): void {
-      this.getPhotos();
+   public readonly photos: Signal<IPhoto[]> = toSignal<IPhoto[], []>(
+      toObservable(this.currentPage).pipe(
+         switchMap((currentPage: number) => {
+            return this.photoService.getPhotos(currentPage);
+         })
+      ),
+      {
+         initialValue: []
+      }
+   );
+
+   public getNext(): void {
+      this.currentPage.update((currentPage: number) => {
+         return currentPage >= 1 ? currentPage + 1 : 1;
+      });
    }
 
-   private getPhotos(): void {
-      this.photoService.getPhotos()
-         .subscribe((photos: IPhoto[]) => {
-            this.photos.set(photos);
-         });
+   public getPrevious(): void {
+      this.currentPage.update((currentPage: number) => {
+         return currentPage > 1 ? currentPage - 1 : 1;
+      });
    }
 }

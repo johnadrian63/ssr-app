@@ -1,14 +1,15 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
-import { UserService } from "../data/services/user.service";
 import { IUser } from "../data/models/IUser";
+import { UserService } from "../data/services/user.service";
 
 @Component({
    selector: 'app-user-view',
    imports: [],
    templateUrl: './user-view.html',
    styleUrl: './user-view.scss',
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserView implements OnInit {
    private readonly userService: UserService = inject<UserService>(UserService);

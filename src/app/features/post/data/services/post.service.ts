@@ -12,8 +12,13 @@ export class PostService {
    private readonly httpClient = inject(HttpClient);
    private readonly baseUrl = inject<string>(API_URL);
 
-   public getPosts(): Observable<IPost[]> {
-      return this.httpClient.get<IPost[]>(`${this.baseUrl}/posts`);
+   public getPosts(page: number): Observable<IPost[]> {
+      return this.httpClient.get<IPost[]>(`${this.baseUrl}/posts`, {
+         params: {
+            _page: page,
+            _limit: 50
+         }
+      });
    }
 
    public getPost(postId: number): Observable<IPost> {

@@ -12,9 +12,10 @@ export class PhotoService {
    private readonly httpClient = inject(HttpClient);
    private readonly baseUrl = inject<string>(API_URL);
 
-   public getPhotos(): Observable<IPhoto[]> {
+   public getPhotos(page: number): Observable<IPhoto[]> {
       return this.httpClient.get<IPhoto[]>(`${this.baseUrl}/photos`, {
          params: {
+            _page: page,
             _limit: 150
          }
       });
